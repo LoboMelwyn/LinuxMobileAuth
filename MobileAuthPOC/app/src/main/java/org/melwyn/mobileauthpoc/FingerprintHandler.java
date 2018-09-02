@@ -4,6 +4,7 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.os.AsyncTask;
 import android.os.CancellationSignal;
 import android.util.JsonReader;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.json.JSONObject;
@@ -20,10 +21,12 @@ import java.net.URL;
 public class FingerprintHandler extends FingerprintManager.AuthenticationCallback {
 
     private TextView tv;
+    private EditText et;
 
 
-    public FingerprintHandler(TextView tv) {
+    public FingerprintHandler(TextView tv, EditText et) {
         this.tv = tv;
+        this.et = et;
     }
 
     @Override
@@ -65,7 +68,8 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
 
     private void PostDataAPI(){
         try {
-            URL httpbinEndpoint = new URL("http://192.168.43.236/api/authenticate");
+            String ipaddr = et.getText().toString();
+            URL httpbinEndpoint = new URL("http://"+ipaddr+"/api/authenticate");
             HttpURLConnection myConnection = (HttpURLConnection) httpbinEndpoint.openConnection();
             myConnection.setRequestMethod("POST");
             myConnection.setRequestProperty("Content-Type","application/json");

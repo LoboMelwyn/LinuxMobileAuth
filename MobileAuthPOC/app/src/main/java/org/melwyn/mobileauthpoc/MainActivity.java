@@ -9,6 +9,7 @@ import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -43,8 +44,9 @@ public class MainActivity extends Activity {
 
         message = findViewById(R.id.fingerStatus);
         Button btn = findViewById(R.id.authBtn);
+        EditText ipaddr = findViewById(R.id.ipaddress);
 
-        final FingerprintHandler fph = new FingerprintHandler(message);
+        final FingerprintHandler fph = new FingerprintHandler(message, ipaddr);
 
         if (!checkFinger()) {
             btn.setEnabled(false);
